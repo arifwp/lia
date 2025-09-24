@@ -1,0 +1,187 @@
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useMutation } from "@tanstack/react-query";
+import { Image } from "expo-image";
+import { Controller, useForm } from "react-hook-form";
+import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { RootStackParamList } from "../../App";
+import { ButtonPrimary } from "../../components/buttons/ButtonPrimary";
+import { InputPrimary } from "../../components/inputs/InputPrimary";
+import { colors } from "../../styles/colors";
+import { globalStyle } from "../../styles/globalStyle";
+import { Toast } from "toastify-react-native";
+import { COMMON_ERR_MSG } from "../../constants/error";
+
+interface Login {
+  email: string;
+  password: string;
+}
+
+export const LoginScreen = () => {
+  const insets = useSafeAreaInsets();
+
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Login>();
+
+  const loginMutation = useMutation({
+    mutationFn: async (data: Login) => {
+      throw new Error();
+    },
+    onSuccess: () => {},
+    onError: (error) => {
+      Toast.show({
+        type: "success",
+        text1: "Login Gagal",
+        text2: COMMON_ERR_MSG,
+      });
+    },
+    onSettled: () => {},
+  });
+
+  const onSubmit = (data: Login) => {
+    loginMutation.mutate(data);
+  };
+
+  return (
+    <TouchableWithoutFeedback>
+      <View
+        style={[
+          globalStyle["root-container"],
+          {
+            paddingTop: insets.top,
+            paddingBottom: insets.bottom,
+            gap: 24,
+          },
+        ]}
+      >
+        <View style={{ gap: 14 }}>
+          <Image
+            style={globalStyle["sm-logo"]}
+            source="https://placehold.co/500x500.png"
+            contentFit="contain"
+            cachePolicy={"disk"}
+          />
+
+          <View style={styles["container-title"]}>
+            <Text style={[globalStyle["xl-title"], { fontWeight: 600 }]}>
+              Welcome Back 👋
+            </Text>
+
+            <View style={styles["container-app-title"]}>
+              <Text style={[globalStyle["xl-title"], { fontWeight: 600 }]}>
+                to
+              </Text>
+
+              <Text
+                style={[
+                  globalStyle["xl-title"],
+                  { fontWeight: 600, color: colors.primary },
+                ]}
+              >
+                LIA
+              </Text>
+            </View>
+          </View>
+
+          <Text
+            style={[
+              styles.subtitle,
+              {
+                marginTop: -8,
+              },
+            ]}
+          >
+            Hello there, register to continue
+          </Text>
+        </View>
+
+        <View style={{ flex: 1, gap: 14 }}>
+          <Controller
+            name="email"
+            control={control}
+            rules={{ required: "Email must be filled" }}
+            render={({ field }) => (
+              <InputPrimary
+                label="Email address"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.email?.message}
+              />
+            )}
+          />
+
+          <Controller
+            name="password"
+            control={control}
+            rules={{ required: "Password must be filled" }}
+            render={({ field }) => (
+              <InputPrimary
+                label="Password"
+                value={field.value}
+                onChange={field.onChange}
+                error={errors.password?.message}
+              />
+            )}
+          />
+
+          <Text style={styles["forgot-password"]}>Forgot Password?</Text>
+
+          <ButtonPrimary
+            buttonStyle={{ marginTop: 14 }}
+            title="Login"
+            onPress={handleSubmit(onSubmit)}
+          />
+        </View>
+
+        <View style={styles["container-register"]}>
+          <Text>Don't have any account?</Text>
+
+          <Text
+            style={styles["link-register"]}
+            onPress={() => navigation.navigate("Register")}
+          >
+            Login
+          </Text>
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
+  );
+};
+
+const styles = StyleSheet.create({
+  subtitle: {
+    fontSize: 14,
+    fontWeight: 400,
+    color: colors["primary-gray"],
+  },
+  "container-title": {
+    flexDirection: "column",
+    gap: 4,
+  },
+  "container-app-title": {
+    flexDirection: "row",
+    gap: 8,
+  },
+  "forgot-password": {
+    color: colors.primary,
+    alignSelf: "flex-end",
+    fontSize: 14,
+  },
+  "container-register": {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 4,
+  },
+  "link-register": {
+    fontSize: 14,
+    fontWeight: 600,
+    color: colors.primary,
+  },
+});
