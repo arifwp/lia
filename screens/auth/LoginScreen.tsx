@@ -3,15 +3,21 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useMutation } from "@tanstack/react-query";
 import { Image } from "expo-image";
 import { Controller, useForm } from "react-hook-form";
-import { StyleSheet, Text, TouchableWithoutFeedback, View } from "react-native";
+import {
+  Keyboard,
+  StyleSheet,
+  Text,
+  TouchableWithoutFeedback,
+  View,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { RootStackParamList } from "../../App";
+import { Toast } from "toastify-react-native";
 import { ButtonPrimary } from "../../components/buttons/ButtonPrimary";
 import { InputPrimary } from "../../components/inputs/InputPrimary";
+import { COMMON_ERR_MSG } from "../../constants/error";
+import { RootStackParamList } from "../../navs/RootNav";
 import { colors } from "../../styles/colors";
 import { globalStyle } from "../../styles/globalStyle";
-import { Toast } from "toastify-react-native";
-import { COMMON_ERR_MSG } from "../../constants/error";
 
 interface Login {
   email: string;
@@ -32,13 +38,27 @@ export const LoginScreen = () => {
 
   const loginMutation = useMutation({
     mutationFn: async (data: Login) => {
-      throw new Error();
+      // throw new Error();
     },
-    onSuccess: () => {},
-    onError: (error) => {
+    onSuccess: () => {
       Toast.show({
         type: "success",
-        text1: "Login Gagal",
+        text1: "Login Success",
+      });
+
+      navigation.reset({
+        index: 0,
+        routes: [
+          {
+            name: "Home",
+          },
+        ],
+      });
+    },
+    onError: (error) => {
+      Toast.show({
+        type: "error",
+        text1: "Login Failed",
         text2: COMMON_ERR_MSG,
       });
     },
@@ -50,7 +70,7 @@ export const LoginScreen = () => {
   };
 
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View
         style={[
           globalStyle["root-container"],
@@ -147,7 +167,7 @@ export const LoginScreen = () => {
             style={styles["link-register"]}
             onPress={() => navigation.navigate("Register")}
           >
-            Login
+            Register
           </Text>
         </View>
       </View>

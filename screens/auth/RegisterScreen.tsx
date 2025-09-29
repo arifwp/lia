@@ -12,12 +12,13 @@ import {
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Toast } from "toastify-react-native";
-import { RootStackParamList } from "../../App";
 import { ButtonPrimary } from "../../components/buttons/ButtonPrimary";
 import { InputCheckbox } from "../../components/inputs/InputCheckbox";
 import { InputPrimary } from "../../components/inputs/InputPrimary";
+import { RootStackParamList } from "../../navs/RootNav";
 import { colors } from "../../styles/colors";
 import { globalStyle } from "../../styles/globalStyle";
+import { TextSen } from "../../components/texts/TextSen";
 
 interface Register {
   fullName: string;
@@ -75,9 +76,9 @@ export const RegisterScreen = () => {
           />
 
           <View style={styles["container-title"]}>
-            <Text style={[globalStyle["xl-title"], { fontWeight: 600 }]}>
+            <TextSen style={[globalStyle["xl-title"], { fontWeight: 600 }]}>
               Register Account
-            </Text>
+            </TextSen>
 
             <View style={styles["container-app-title"]}>
               <Text style={[globalStyle["xl-title"], { fontWeight: 600 }]}>
