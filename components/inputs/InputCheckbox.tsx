@@ -1,5 +1,6 @@
 import Checkbox, { CheckboxProps } from "expo-checkbox";
 import { Pressable, StyleSheet, Text, ViewStyle } from "react-native";
+import { colors } from "../../styles/colors";
 
 interface Props extends CheckboxProps {
   label: string;
@@ -30,7 +31,7 @@ export const InputCheckbox = ({
       <Checkbox
         style={[styles.checkbox, checkboxStyle]}
         value={value}
-        color={value ? "#3085FE" : undefined}
+        color={value ? colors.primary : undefined}
         onValueChange={onValueChange}
         {...rest}
       />
