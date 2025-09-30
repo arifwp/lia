@@ -1,4 +1,11 @@
-import { Pressable, StyleSheet } from "react-native";
+import {
+  Pressable,
+  PressableProps,
+  StyleProp,
+  StyleSheet,
+  TextStyle,
+  ViewStyle,
+} from "react-native";
 import { TextSen } from "./TextSen";
 
 export interface BasicData {
@@ -6,14 +13,21 @@ export interface BasicData {
   name: string;
 }
 
-interface Props {
+interface Props extends PressableProps {
   data: BasicData;
+  containerStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
 }
 
-export const TextRounded = ({ data }: Props) => {
+export const TextRounded = ({
+  data,
+  containerStyle,
+  textStyle,
+  ...rest
+}: Props) => {
   return (
-    <Pressable style={styles.container}>
-      <TextSen style={styles.name}>{data.name}</TextSen>
+    <Pressable style={[styles.container, containerStyle]} {...rest}>
+      <TextSen style={[styles.name, textStyle]}>{data.name}</TextSen>
     </Pressable>
   );
 };

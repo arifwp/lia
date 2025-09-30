@@ -9,7 +9,6 @@ import {
   ViewStyle,
 } from "react-native";
 import { colors } from "../../styles/colors";
-import { ModalBase } from "../modals/ModalBase";
 import { SearchModalFilter } from "../page/search/SearchModalFilter";
 
 interface Props extends PressableProps {
