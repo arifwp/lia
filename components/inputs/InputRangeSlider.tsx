@@ -24,7 +24,7 @@ export const InputRangeSlider = ({
         maximumValue={maxVal}
         value={value}
         onValueChange={onChange}
-        minimumTrackTintColor={colors["primary-black"]}
+        minimumTrackTintColor={colors.primary}
         maximumTrackTintColor={colors["primary-gray"]}
       />
 
