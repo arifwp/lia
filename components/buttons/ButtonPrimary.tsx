@@ -1,8 +1,8 @@
 import {
+  Pressable,
   StyleProp,
   StyleSheet,
   Text,
-  TouchableOpacity,
   TouchableOpacityProps,
   ViewStyle,
 } from "react-native";
@@ -23,14 +23,9 @@ export const ButtonPrimary = ({
   ...rest
 }: Props) => {
   return (
-    <TouchableOpacity
-      onPress={onPress}
-      style={[styles.button, buttonStyle]}
-      activeOpacity={0.8}
-      {...rest}
-    >
+    <Pressable onPress={onPress} style={[styles.button, buttonStyle]} {...rest}>
       <Text style={[styles.text, textStyle]}>{title}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
