@@ -19,6 +19,7 @@ interface Props extends PropsWithChildren {
   onClose: VoidFunction;
   title: string;
   style?: StyleProp<ViewStyle>;
+  height?: string;
 }
 
 export const ModalBase = ({
@@ -27,9 +28,21 @@ export const ModalBase = ({
   onClose,
   style,
   title,
+  height,
 }: Props) => {
   const insets = useSafeAreaInsets();
   const screenHeight = Dimensions.get("window").height;
+
+  const getHeight = () => {
+    if (!height) return screenHeight - insets.top;
+
+    if (typeof height === "string" && height.includes("%")) {
+      const percent = parseFloat(height) / 100;
+      return screenHeight * percent;
+    }
+
+    return Number(height);
+  };
 
   return (
     <View>
@@ -45,12 +58,7 @@ export const ModalBase = ({
         onBackButtonPress={onClose}
       >
         {/* Modal Content */}
-        <View
-          style={[
-            styles["modal-content"],
-            { height: screenHeight - insets.top },
-          ]}
-        >
+        <View style={[styles["modal-content"], { height: getHeight() }]}>
           <View style={styles["title-container"]}>
             <TextSen style={styles.title} weight={BOLD}>
               {title}
@@ -77,7 +85,7 @@ const styles = StyleSheet.create({
     margin: 0,
   },
   "modal-content": {
-    height: "75%",
+    // height: "75%",
     width: "100%",
     backgroundColor: "white",
     borderTopRightRadius: 20,
