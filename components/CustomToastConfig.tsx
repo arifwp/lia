@@ -1,15 +1,16 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { TextSen } from "./texts/TextSen";
 
 export const CustomToastConfig = {
   success: ({ text1, text2, hide }: any) => (
     <View style={[styles.container, styles.success]}>
       <View style={styles.row}>
         <View style={styles["container-text"]}>
-          <Text style={styles.text1}>{text1}</Text>
-          {text2 && <Text style={styles.text2}>{text2}</Text>}
+          <TextSen style={styles.text1}>{text1}</TextSen>
+          {text2 && <TextSen style={styles.text2}>{text2}</TextSen>}
         </View>
         <TouchableOpacity onPress={hide}>
-          <Text style={styles.close}>✕</Text>
+          <TextSen style={styles.close}>✕</TextSen>
         </TouchableOpacity>
       </View>
     </View>
@@ -18,11 +19,11 @@ export const CustomToastConfig = {
     <View style={[styles.container, styles.error]}>
       <View style={styles.row}>
         <View style={styles["container-text"]}>
-          <Text style={styles.text1}>{text1}</Text>
-          {text2 && <Text style={styles.text2}>{text2}</Text>}
+          <TextSen style={styles.text1}>{text1}</TextSen>
+          {text2 && <TextSen style={styles.text2}>{text2}</TextSen>}
         </View>
         <TouchableOpacity onPress={hide}>
-          <Text style={styles.close}>✕</Text>
+          <TextSen style={styles.close}>✕</TextSen>
         </TouchableOpacity>
       </View>
     </View>
@@ -31,11 +32,11 @@ export const CustomToastConfig = {
     <View style={[styles.container, styles.info]}>
       <View style={styles.row}>
         <View style={styles["container-text"]}>
-          <Text style={styles.text1}>{text1}</Text>
-          {text2 && <Text style={styles.text2}>{text2}</Text>}
+          <TextSen style={styles.text1}>{text1}</TextSen>
+          {text2 && <TextSen style={styles.text2}>{text2}</TextSen>}
         </View>
         <TouchableOpacity onPress={hide}>
-          <Text style={styles.close}>✕</Text>
+          <TextSen style={styles.close}>✕</TextSen>
         </TouchableOpacity>
       </View>
     </View>
@@ -44,11 +45,11 @@ export const CustomToastConfig = {
     <View style={[styles.container, styles.warning]}>
       <View style={styles.row}>
         <View style={styles["container-text"]}>
-          <Text style={styles.text1}>{text1}</Text>
-          {text2 && <Text style={styles.text2}>{text2}</Text>}
+          <TextSen style={styles.text1}>{text1}</TextSen>
+          {text2 && <TextSen style={styles.text2}>{text2}</TextSen>}
         </View>
         <TouchableOpacity onPress={hide}>
-          <Text style={styles.close}>✕</Text>
+          <TextSen style={styles.close}>✕</TextSen>
         </TouchableOpacity>
       </View>
     </View>
