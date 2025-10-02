@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import {
   StyleProp,
   StyleSheet,
@@ -10,6 +10,7 @@ import {
   View,
   ViewStyle,
 } from "react-native";
+import { useDebounce } from "../../hooks/useDebounce";
 import { RootStackParamList } from "../../navs/RootNav";
 import { colors } from "../../styles/colors";
 
@@ -22,34 +23,45 @@ interface InputSearchProps {
   isSearchScreen?: boolean;
 }
 
-export const InputSearch: React.FC<InputSearchProps> = ({
+export const InputSearch = ({
   value = "",
   onChange,
   placeholder = "Search food or restaurants...",
   debounceTime = 1000,
   containerStyle,
   isSearchScreen = false,
-}) => {
+}: InputSearchProps) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-  const [search, setSearch] = useState(value);
 
-  // Debounce effect
+  const [search, setSearch] = useState<string>(value);
+  const debouncedValue = useDebounce(search, debounceTime);
+
+  // Ref untuk tracking apakah onChange sudah dipanggil
+  const isFirstRender = useRef(true);
+
+  // Sync external value changes ke internal state
   useEffect(() => {
-    if (!onChange) return;
+    setSearch(value);
+  }, [value]);
 
-    const handler = setTimeout(() => {
-      onChange(search);
-    }, debounceTime);
+  // Debounce effect - gunakan useCallback untuk stabilitas
+  useEffect(() => {
+    // Skip first render untuk menghindari double call
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
 
-    return () => clearTimeout(handler);
-  }, [search]);
+    onChange?.(debouncedValue);
+  }, [debouncedValue]); // Hapus onChange dari dependency
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     setSearch("");
-    if (onChange) onChange("");
-  };
+    onChange?.("");
+  }, [onChange]);
 
+  // Non-interactive search (navigates to search screen)
   if (!isSearchScreen) {
     return (
       <TouchableOpacity
@@ -70,6 +82,7 @@ export const InputSearch: React.FC<InputSearchProps> = ({
     );
   }
 
+  // Interactive search
   return (
     <View style={[styles.container, containerStyle]}>
       <Ionicons name="search" size={20} color="#888" style={styles.icon} />
@@ -81,6 +94,7 @@ export const InputSearch: React.FC<InputSearchProps> = ({
         onChangeText={setSearch}
         autoCorrect={false}
         autoCapitalize="none"
+        autoFocus={isSearchScreen} // Auto focus di search screen
       />
 
       {search.length > 0 && (

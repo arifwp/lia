@@ -1,5 +1,5 @@
-import { useState } from "react";
 import { StyleSheet, View } from "react-native";
+import { useSearchFilterStore } from "../../../hooks/useSearchFilterStore";
 import { colors } from "../../../styles/colors";
 import { withOpacity } from "../../../utils/color";
 import { BasicData, TextRounded } from "../../texts/TextRounded";
@@ -24,19 +24,7 @@ const dummyCategories: BasicData[] = [
 ];
 
 export const SearchFilterMultipleSelect = () => {
-  const [selected, setSelected] = useState<BasicData[]>([]);
-
-  const onSelect = (data: BasicData) => {
-    setSelected((prev) => {
-      const exist = prev.find((item) => item.id === data.id);
-
-      if (exist) {
-        return prev.filter((item) => item.id !== data.id);
-      } else {
-        return [...prev, data];
-      }
-    });
-  };
+  const { categories, setCategories } = useSearchFilterStore();
 
   return (
     <View style={styles.container}>
@@ -45,7 +33,7 @@ export const SearchFilterMultipleSelect = () => {
           key={item.id}
           data={item}
           containerStyle={
-            selected.find((v) => v.id === item.id)
+            categories.find((v) => v.id === item.id)
               ? {
                   borderColor: colors.primary,
                   borderWidth: 1,
@@ -53,7 +41,7 @@ export const SearchFilterMultipleSelect = () => {
                 }
               : undefined
           }
-          onPress={() => onSelect(item)}
+          onPress={() => setCategories(item)}
         />
       ))}
     </View>

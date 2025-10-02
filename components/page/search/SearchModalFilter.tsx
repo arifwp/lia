@@ -1,6 +1,7 @@
-import { useState } from "react";
 import { StyleSheet, View } from "react-native";
 import { MEDIUM } from "../../../constants/fonts";
+import { useSearchFilterStore } from "../../../hooks/useSearchFilterStore";
+import { colors } from "../../../styles/colors";
 import { InputRangeSlider } from "../../inputs/InputRangeSlider";
 import { ModalBase } from "../../modals/ModalBase";
 import { TextSen } from "../../texts/TextSen";
@@ -13,7 +14,7 @@ export const SearchModalFilter = ({
   isVisible: boolean;
   onClose: VoidFunction;
 }) => {
-  const [radius, setRadius] = useState<number>(25);
+  const { radius, setRadius } = useSearchFilterStore();
 
   return (
     <ModalBase
@@ -21,6 +22,7 @@ export const SearchModalFilter = ({
       onClose={onClose}
       title="Filter"
       style={{ gap: 24 }}
+      height={"50%"}
     >
       <View style={styles.section}>
         <TextSen weight={MEDIUM} style={styles.title}>
@@ -55,6 +57,11 @@ export const SearchModalFilter = ({
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column",
+    gap: 24,
+  },
   title: {
     fontSize: 16,
   },
@@ -65,5 +72,10 @@ const styles = StyleSheet.create({
   "section-title": {
     flexDirection: "row",
     justifyContent: "space-between",
+  },
+  "button-container": {
+    paddingVertical: 16,
+    borderTopColor: colors["light-gray"],
+    borderTopWidth: 1,
   },
 });

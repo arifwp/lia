@@ -2,6 +2,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { useState } from "react";
 import {
+  Keyboard,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
@@ -18,6 +19,7 @@ import {
 } from "../../components/page/search/SearchSuggestedRestaurants";
 import { BasicData, TextRounded } from "../../components/texts/TextRounded";
 import { TextSen } from "../../components/texts/TextSen";
+import { useDebounce } from "../../hooks/useDebounce";
 import { RootStackParamList } from "../../navs/RootNav";
 import { colors } from "../../styles/colors";
 import { globalStyle } from "../../styles/globalStyle";
@@ -136,6 +138,10 @@ export const SearchScreen = () => {
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const [searchText, setSearchText] = useState<string>("");
+  const debouncedSearch = useDebounce(searchText, 1000);
+  const selectKeyword = (item: BasicData) => {
+    setSearchText(item.name);
+  };
 
   return (
     <KeyboardAvoidingView
@@ -160,7 +166,7 @@ export const SearchScreen = () => {
         <InputSearch
           isSearchScreen={true}
           value={searchText}
-          onChange={(txt) => setSearchText(txt)}
+          onChange={(result: string) => setSearchText(result)}
           containerStyle={{ flex: 1 }}
         />
 
@@ -184,9 +190,16 @@ export const SearchScreen = () => {
             horizontal
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles["sv-keywords"]}
+            keyboardDismissMode="on-drag"
+            keyboardShouldPersistTaps="handled"
+            onScrollBeginDrag={Keyboard.dismiss}
           >
             {dummyKeywords.map((item) => (
-              <TextRounded key={item.id} data={item} />
+              <TextRounded
+                key={item.id}
+                data={item}
+                onPress={() => selectKeyword(item)}
+              />
             ))}
           </ScrollView>
         </View>
