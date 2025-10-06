@@ -17,8 +17,8 @@ import {
   SearchSuggestedRestaurants,
   SuggestedRestaurant,
 } from "../../components/page/search/SearchSuggestedRestaurants";
+import { TextPoppins } from "../../components/texts/TextPoppins";
 import { BasicData, TextRounded } from "../../components/texts/TextRounded";
-import { TextSen } from "../../components/texts/TextSen";
 import { useDebounce } from "../../hooks/useDebounce";
 import { RootStackParamList } from "../../navs/RootNav";
 import { colors } from "../../styles/colors";
@@ -157,7 +157,7 @@ export const SearchScreen = () => {
         <View style={styles["sub-header"]}>
           <ButtonBack />
 
-          <TextSen style={styles["screen-name"]}>Search</TextSen>
+          <TextPoppins style={styles["screen-name"]}>Search</TextPoppins>
         </View>
         <CartIcon />
       </View>
@@ -182,9 +182,9 @@ export const SearchScreen = () => {
             { paddingLeft: 0, marginTop: 0 },
           ]}
         >
-          <TextSen style={[styles.title, { paddingHorizontal: 16 }]}>
+          <TextPoppins style={[styles.title, { paddingHorizontal: 16 }]}>
             Recent Keywords
-          </TextSen>
+          </TextPoppins>
 
           <ScrollView
             horizontal
@@ -206,7 +206,7 @@ export const SearchScreen = () => {
 
         {/* Suggested Restaurants */}
         <View style={[styles["container-section"], { paddingRight: 16 }]}>
-          <TextSen style={styles.title}>Suggested Restaurants</TextSen>
+          <TextPoppins style={styles.title}>Suggested Restaurants</TextPoppins>
 
           <View style={styles["wrap-column"]}>
             {dummySuggestedRestaurants.map((item) => (

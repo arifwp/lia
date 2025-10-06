@@ -4,7 +4,7 @@ import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StyleSheet, TouchableOpacity, View } from "react-native";
 import { RootStackParamList } from "../navs/RootNav";
 import { colors } from "../styles/colors";
-import { TextSen } from "./texts/TextSen";
+import { TextPoppins } from "./texts/TextPoppins";
 
 export const CartIcon = () => {
   const navigation =
@@ -23,7 +23,7 @@ export const CartIcon = () => {
 
       {count > 0 && (
         <View style={styles.wrapTotal}>
-          <TextSen style={styles.text}>{displayCount}</TextSen>
+          <TextPoppins style={styles.text}>{displayCount}</TextPoppins>
         </View>
       )}
     </TouchableOpacity>

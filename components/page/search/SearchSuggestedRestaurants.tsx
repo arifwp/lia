@@ -3,7 +3,7 @@ import { Image } from "expo-image";
 import { StyleSheet, View } from "react-native";
 import { colors } from "../../../styles/colors";
 import { blurImg } from "../../../styles/globalStyle";
-import { TextSen } from "../../texts/TextSen";
+import { TextPoppins } from "../../texts/TextPoppins";
 
 export interface SuggestedRestaurant {
   id: number;
@@ -28,14 +28,14 @@ export const SearchSuggestedRestaurants = ({ data }: Props) => {
       />
 
       <View style={styles["container-info"]}>
-        <TextSen style={styles.name} numberOfLines={1} ellipsizeMode="tail">
+        <TextPoppins style={styles.name} numberOfLines={1} ellipsizeMode="tail">
           {data.name}
-        </TextSen>
+        </TextPoppins>
 
         <View style={styles["container-rating"]}>
           <AntDesign name="star" size={12} color={colors.primary} />
 
-          <TextSen style={styles.rating}>{data.rating}</TextSen>
+          <TextPoppins style={styles.rating}>{data.rating}</TextPoppins>
         </View>
       </View>
     </View>

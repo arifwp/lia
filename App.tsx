@@ -35,11 +35,12 @@ export default function App() {
   useAppState(onAppStateChange);
 
   const [fontsLoaded] = useFonts({
-    "Sen-Regular": require("./assets/fonts/Sen-Regular.ttf"),
-    "Sen-Medium": require("./assets/fonts/Sen-Medium.ttf"),
-    "Sen-SemiBold": require("./assets/fonts/Sen-SemiBold.ttf"),
-    "Sen-Bold": require("./assets/fonts/Sen-Bold.ttf"),
-    "Sen-ExtraBold": require("./assets/fonts/Sen-ExtraBold.ttf"),
+    "Poppins-Thin": require("./assets/fonts/Poppins-Thin.ttf"),
+    "Poppins-Regular": require("./assets/fonts/Poppins-Regular.ttf"),
+    "Poppins-SemiBold": require("./assets/fonts/Poppins-SemiBold.ttf"),
+    "Poppins-Medium": require("./assets/fonts/Poppins-Medium.ttf"),
+    "Poppins-Bold": require("./assets/fonts/Poppins-Bold.ttf"),
+    "Poppins-ExtraBold": require("./assets/fonts/Poppins-ExtraBold.ttf"),
   });
 
   useEffect(() => {

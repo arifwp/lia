@@ -4,7 +4,7 @@ import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { CartIcon } from "../../components/CartIcon";
 import { InputSearch } from "../../components/inputs/InputSearch";
-import { TextSen } from "../../components/texts/TextSen";
+import { TextPoppins } from "../../components/texts/TextPoppins";
 import { RootStackParamList } from "../../navs/RootNav";
 import { colors } from "../../styles/colors";
 import { globalStyle } from "../../styles/globalStyle";
@@ -30,9 +30,9 @@ export const HomeScreen = () => {
       {/* Header */}
       <View style={styles.header}>
         <View style={{ flexDirection: "column", gap: 4 }}>
-          <TextSen style={styles["static-title"]}>DELIVER TO</TextSen>
+          <TextPoppins style={styles["static-title"]}>DELIVER TO</TextPoppins>
 
-          <TextSen style={styles.address}>Halal Lab Office</TextSen>
+          <TextPoppins style={styles.address}>Halal Lab Office</TextPoppins>
         </View>
 
         <CartIcon />

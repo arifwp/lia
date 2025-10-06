@@ -45,7 +45,7 @@ export const InputSearch = ({
     setSearch(value);
   }, [value]);
 
-  // Debounce effect - gunakan useCallback untuk stabilitas
+  // Debounce effect
   useEffect(() => {
     // Skip first render untuk menghindari double call
     if (isFirstRender.current) {
@@ -54,14 +54,13 @@ export const InputSearch = ({
     }
 
     onChange?.(debouncedValue);
-  }, [debouncedValue]); // Hapus onChange dari dependency
+  }, [debouncedValue]);
 
   const handleClear = useCallback(() => {
     setSearch("");
     onChange?.("");
   }, [onChange]);
 
-  // Non-interactive search (navigates to search screen)
   if (!isSearchScreen) {
     return (
       <TouchableOpacity
@@ -94,7 +93,7 @@ export const InputSearch = ({
         onChangeText={setSearch}
         autoCorrect={false}
         autoCapitalize="none"
-        autoFocus={isSearchScreen} // Auto focus di search screen
+        autoFocus={isSearchScreen}
       />
 
       {search.length > 0 && (

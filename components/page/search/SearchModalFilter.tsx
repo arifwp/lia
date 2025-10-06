@@ -4,7 +4,7 @@ import { useSearchFilterStore } from "../../../hooks/useSearchFilterStore";
 import { colors } from "../../../styles/colors";
 import { InputRangeSlider } from "../../inputs/InputRangeSlider";
 import { ModalBase } from "../../modals/ModalBase";
-import { TextSen } from "../../texts/TextSen";
+import { TextPoppins } from "../../texts/TextPoppins";
 import { SearchFilterMultipleSelect } from "./SearchFilterMultipleSelect";
 
 export const SearchModalFilter = ({
@@ -25,22 +25,22 @@ export const SearchModalFilter = ({
       height={"50%"}
     >
       <View style={styles.section}>
-        <TextSen weight={MEDIUM} style={styles.title}>
+        <TextPoppins weight={MEDIUM} style={styles.title}>
           Category
-        </TextSen>
+        </TextPoppins>
 
         <SearchFilterMultipleSelect />
       </View>
 
       <View style={styles.section}>
         <View style={styles["section-title"]}>
-          <TextSen weight={MEDIUM} style={styles.title}>
+          <TextPoppins weight={MEDIUM} style={styles.title}>
             Radius
-          </TextSen>
+          </TextPoppins>
 
-          <TextSen weight={MEDIUM} style={styles.title}>
+          <TextPoppins weight={MEDIUM} style={styles.title}>
             {radius.toFixed()} KM
-          </TextSen>
+          </TextPoppins>
         </View>
 
         <InputRangeSlider

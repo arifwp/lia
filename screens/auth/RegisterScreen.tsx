@@ -15,10 +15,10 @@ import { Toast } from "toastify-react-native";
 import { ButtonPrimary } from "../../components/buttons/ButtonPrimary";
 import { InputCheckbox } from "../../components/inputs/InputCheckbox";
 import { InputPrimary } from "../../components/inputs/InputPrimary";
+import { TextPoppins } from "../../components/texts/TextPoppins";
 import { RootStackParamList } from "../../navs/RootNav";
 import { colors } from "../../styles/colors";
 import { globalStyle } from "../../styles/globalStyle";
-import { TextSen } from "../../components/texts/TextSen";
 
 interface Register {
   fullName: string;
@@ -76,9 +76,9 @@ export const RegisterScreen = () => {
           />
 
           <View style={styles["container-title"]}>
-            <TextSen style={[globalStyle["xl-title"], { fontWeight: 600 }]}>
+            <TextPoppins style={[globalStyle["xl-title"], { fontWeight: 600 }]}>
               Register Account
-            </TextSen>
+            </TextPoppins>
 
             <View style={styles["container-app-title"]}>
               <Text style={[globalStyle["xl-title"], { fontWeight: 600 }]}>

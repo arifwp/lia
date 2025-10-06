@@ -1,7 +1,7 @@
 import Slider from "@react-native-community/slider";
 import { StyleSheet, View } from "react-native";
 import { colors } from "../../styles/colors";
-import { TextSen } from "../texts/TextSen";
+import { TextPoppins } from "../texts/TextPoppins";
 
 interface Props {
   maxVal?: number;
@@ -29,8 +29,8 @@ export const InputRangeSlider = ({
       />
 
       <View style={styles["container-text"]}>
-        <TextSen>{minVal}</TextSen>
-        <TextSen>{maxVal}</TextSen>
+        <TextPoppins>{minVal}</TextPoppins>
+        <TextPoppins>{maxVal}</TextPoppins>
       </View>
     </View>
   );

@@ -31,11 +31,12 @@
       "expo-font",
       {
         "fonts": [
-          "./assets/fonts/Sen-Regular.ttf",
-          "./assets/fonts/Sen-Medium.ttf",
-          "./assets/fonts/Sen-SemiBold.ttf",
-          "./assets/fonts/Sen-Bold.ttf",
-          "./assets/fonts/Sen-ExtraBold.ttf"
+          "./assets/fonts/Poppins-Thin.ttf",
+          "./assets/fonts/Poppins-Regular.ttf",
+          "./assets/fonts/Poppins-SemiBold.ttf",
+          "./assets/fonts/Poppins-Medium.ttf",
+          "./assets/fonts/Poppins-Bold.ttf",
+          "./assets/fonts/Poppins-ExtraBold.ttf"
         ]
       }
      ]

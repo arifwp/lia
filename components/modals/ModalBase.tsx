@@ -12,7 +12,7 @@ import Modal from "react-native-modal";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BOLD } from "../../constants/fonts";
 import { colors } from "../../styles/colors";
-import { TextSen } from "../texts/TextSen";
+import { TextPoppins } from "../texts/TextPoppins";
 
 interface Props extends PropsWithChildren {
   isVisible: boolean;
@@ -60,9 +60,9 @@ export const ModalBase = ({
         {/* Modal Content */}
         <View style={[styles["modal-content"], { height: getHeight() }]}>
           <View style={styles["title-container"]}>
-            <TextSen style={styles.title} weight={BOLD}>
+            <TextPoppins style={styles.title} weight={BOLD}>
               {title}
-            </TextSen>
+            </TextPoppins>
             <Pressable onPress={onClose}>
               <MaterialIcons
                 name="close"

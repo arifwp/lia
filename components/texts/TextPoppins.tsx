@@ -10,14 +10,14 @@ import { colors } from "../../styles/colors";
 
 interface Props extends TextProps {
   style?: StyleProp<TextStyle>;
-  weight?: "Regular" | "Bold" | "Medium" | "ExtraBold" | "SemiBold";
+  weight?: "Thin" | "Regular" | "Bold" | "Medium" | "ExtraBold" | "SemiBold";
   children: React.ReactNode;
 }
 
-export const TextSen = ({ style, weight, children, ...rest }: Props) => {
+export const TextPoppins = ({ style, weight, children, ...rest }: Props) => {
   return (
     <Text
-      style={[styles.text, { fontFamily: `Sen-${weight}` }, style]}
+      style={[styles.text, { fontFamily: `Poppins-${weight}` }, style]}
       {...rest}
     >
       {children}

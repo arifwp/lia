@@ -6,7 +6,7 @@ import {
   TextStyle,
   ViewStyle,
 } from "react-native";
-import { TextSen } from "./TextSen";
+import { TextPoppins } from "./TextPoppins";
 
 export interface BasicData {
   id: number;
@@ -27,7 +27,7 @@ export const TextRounded = ({
 }: Props) => {
   return (
     <Pressable style={[styles.container, containerStyle]} {...rest}>
-      <TextSen style={[styles.name, textStyle]}>{data.name}</TextSen>
+      <TextPoppins style={[styles.name, textStyle]}>{data.name}</TextPoppins>
     </Pressable>
   );
 };
