@@ -2,7 +2,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { StyleSheet, TouchableOpacity } from "react-native";
-import { RootStackParamList } from "../../navs/RootNav";
+import { RootStackParamList } from "../../navs/navigation";
 
 export const ButtonBack = () => {
   const navigation =
