@@ -10,11 +10,12 @@
   },
   "dependencies": {
     "@expo/ui": "~0.2.0-beta.2",
+    "@react-native-async-storage/async-storage": "^2.2.0",
     "@react-native-community/netinfo": "^11.4.1",
     "@react-native-community/slider": "5.0.1",
     "@react-native-vector-icons/evil-icons": "^12.3.0",
     "@react-native-vector-icons/fontawesome6": "^12.2.0",
-    "@react-navigation/bottom-tabs": "^7.4.7",
+    "@react-navigation/bottom-tabs": "^7.4.8",
     "@react-navigation/drawer": "^7.5.8",
     "@react-navigation/elements": "^2.6.4",
     "@react-navigation/native": "^7.1.17",
