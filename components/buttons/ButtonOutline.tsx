@@ -17,7 +17,7 @@ interface Props extends TouchableOpacityProps {
   isLoading?: boolean;
 }
 
-export const ButtonPrimary = ({
+export const ButtonOutline = ({
   onPress,
   title,
   buttonStyle,
@@ -38,12 +38,11 @@ const styles = StyleSheet.create({
   button: {
     padding: 14,
     borderRadius: 8,
-    backgroundColor: colors.primary,
+    borderWidth: 1,
+    borderColor: colors.primary,
   },
   text: {
     textAlign: "center",
-    color: "white",
-    fontWeight: 600,
-    fontSize: 14,
+    color: colors.primary,
   },
 });

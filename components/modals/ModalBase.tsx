@@ -1,81 +1,83 @@
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { PropsWithChildren } from "react";
+import React, { useState } from "react";
 import {
   Dimensions,
-  Pressable,
-  StyleProp,
-  StyleSheet,
+  LayoutChangeEvent,
+  ScrollView,
   View,
-  ViewStyle,
+  Pressable,
+  StyleSheet,
 } from "react-native";
 import Modal from "react-native-modal";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import { TextPoppins } from "../texts/TextPoppins";
+import { colors } from "../../styles/colors";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BOLD } from "../../constants/fonts";
-import { colors } from "../../styles/colors";
-import { TextPoppins } from "../texts/TextPoppins";
-
-interface Props extends PropsWithChildren {
-  isVisible: boolean;
-  onClose: VoidFunction;
-  title: string;
-  style?: StyleProp<ViewStyle>;
-  height?: string;
-}
 
 export const ModalBase = ({
   isVisible,
   children,
   onClose,
-  style,
   title,
-  height,
-}: Props) => {
+}: {
+  isVisible: boolean;
+  onClose: VoidFunction;
+  title: string;
+  children: React.ReactNode;
+}) => {
   const insets = useSafeAreaInsets();
   const screenHeight = Dimensions.get("window").height;
+  const [contentHeight, setContentHeight] = useState(0);
 
-  const getHeight = () => {
-    if (!height) return screenHeight - insets.top;
-
-    if (typeof height === "string" && height.includes("%")) {
-      const percent = parseFloat(height) / 100;
-      return screenHeight * percent;
-    }
-
-    return Number(height);
+  const handleLayout = (e: LayoutChangeEvent) => {
+    const { height } = e.nativeEvent.layout;
+    setContentHeight(height);
   };
 
-  return (
-    <View>
-      <Modal
-        style={styles.modal}
-        animationIn={"slideInUp"}
-        animationOut={"slideOutDown"}
-        isVisible={isVisible}
-        swipeDirection={"down"}
-        swipeThreshold={90}
-        onBackdropPress={onClose}
-        onSwipeComplete={onClose}
-        onBackButtonPress={onClose}
-      >
-        {/* Modal Content */}
-        <View style={[styles["modal-content"], { height: getHeight() }]}>
-          <View style={styles["title-container"]}>
-            <TextPoppins style={styles.title} weight={BOLD}>
-              {title}
-            </TextPoppins>
-            <Pressable onPress={onClose}>
-              <MaterialIcons
-                name="close"
-                color={colors["primary-black"]}
-                size={22}
-              />
-            </Pressable>
-          </View>
+  const modalHeight = Math.min(
+    contentHeight + 40 + insets.bottom,
+    screenHeight * 0.95
+  ); // max 95% layar
 
-          <View style={[styles["view-children"], style]}>{children}</View>
+  return (
+    <Modal
+      style={styles.modal}
+      isVisible={isVisible}
+      animationIn="slideInUp"
+      animationOut="slideOutDown"
+      onBackdropPress={onClose}
+      onSwipeComplete={onClose}
+      swipeDirection="down"
+    >
+      <View
+        style={[
+          styles.container,
+          { maxHeight: screenHeight * 0.95, height: modalHeight },
+        ]}
+      >
+        {/* Header */}
+        <View style={styles.header}>
+          <TextPoppins style={styles.title} weight={BOLD}>
+            {title}
+          </TextPoppins>
+          <Pressable onPress={onClose}>
+            <MaterialIcons
+              name="close"
+              size={22}
+              color={colors["primary-black"]}
+            />
+          </Pressable>
         </View>
-      </Modal>
-    </View>
+
+        {/* Content */}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.scrollContainer}
+        >
+          <View onLayout={handleLayout}>{children}</View>
+        </ScrollView>
+      </View>
+    </Modal>
   );
 };
 
@@ -84,16 +86,15 @@ const styles = StyleSheet.create({
     justifyContent: "flex-end",
     margin: 0,
   },
-  "modal-content": {
-    // height: "75%",
-    width: "100%",
+  container: {
     backgroundColor: "white",
-    borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    overflow: "hidden",
   },
-  "title-container": {
-    paddingVertical: 20,
+  header: {
     paddingHorizontal: 20,
+    paddingVertical: 20,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -102,14 +103,8 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: colors["primary-black"],
   },
-  overlay: {
-    flex: 1,
-    backgroundColor: "rgba(0,0,0,0.7)",
-    justifyContent: "flex-end",
-  },
-  "view-children": {
-    flexDirection: "column",
+  scrollContainer: {
     paddingHorizontal: 20,
-    gap: 16,
+    paddingBottom: 24,
   },
 });

@@ -11,6 +11,8 @@ import { TextPoppins } from "./TextPoppins";
 export interface BasicData {
   id: number;
   name: string;
+  img?: string;
+  desc?: string;
 }
 
 interface Props extends PressableProps {
