@@ -15,7 +15,8 @@ import { Toast } from "toastify-react-native";
 import { ButtonPrimary } from "../../components/buttons/ButtonPrimary";
 import { InputPrimary } from "../../components/inputs/InputPrimary";
 import { COMMON_ERR_MSG } from "../../constants/error";
-import { RootStackParamList } from "../../navs/RootNav";
+import { useAuthStore } from "../../hooks/useAuthStore";
+import { RootStackParamList } from "../../navs/navigation";
 import { colors } from "../../styles/colors";
 import { globalStyle } from "../../styles/globalStyle";
 
@@ -26,6 +27,7 @@ interface Login {
 
 export const LoginScreen = () => {
   const insets = useSafeAreaInsets();
+  const login = useAuthStore((state) => state.login);
 
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -38,21 +40,23 @@ export const LoginScreen = () => {
 
   const loginMutation = useMutation({
     mutationFn: async (data: Login) => {
-      // throw new Error();
+      // Your actual Supabase login here
+      // const { data: authData, error } = await supabase.auth.signInWithPassword({
+      //   email: data.email,
+      //   password: data.password,
+      // });
+      // if (error) throw error;
+      // return authData.session.access_token;
+
+      // Mock for now
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      return "mock-token-12345";
     },
-    onSuccess: () => {
+    onSuccess: async (token) => {
+      await login(token);
       Toast.show({
         type: "success",
         text1: "Login Success",
-      });
-
-      navigation.reset({
-        index: 0,
-        routes: [
-          {
-            name: "Home",
-          },
-        ],
       });
     },
     onError: (error) => {
@@ -62,7 +66,6 @@ export const LoginScreen = () => {
         text2: COMMON_ERR_MSG,
       });
     },
-    onSettled: () => {},
   });
 
   const onSubmit = (data: Login) => {
@@ -118,7 +121,7 @@ export const LoginScreen = () => {
               },
             ]}
           >
-            Hello there, register to continue
+            Hello there, login to continue
           </Text>
         </View>
 
@@ -147,6 +150,7 @@ export const LoginScreen = () => {
                 value={field.value}
                 onChange={field.onChange}
                 error={errors.password?.message}
+                secureTextEntry
               />
             )}
           />
@@ -157,6 +161,7 @@ export const LoginScreen = () => {
             buttonStyle={{ marginTop: 14 }}
             title="Login"
             onPress={handleSubmit(onSubmit)}
+            isLoading={loginMutation.isPending}
           />
         </View>
 
@@ -165,7 +170,7 @@ export const LoginScreen = () => {
 
           <Text
             style={styles["link-register"]}
-            onPress={() => navigation.navigate("Register")}
+            onPress={() => navigation.navigate("Auth", { screen: "Register" })}
           >
             Register
           </Text>

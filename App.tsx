@@ -1,4 +1,4 @@
-import { createStaticNavigation } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import {
   focusManager,
   QueryClient,
@@ -12,6 +12,7 @@ import { SafeAreaProvider } from "react-native-safe-area-context";
 import ToastManager from "toastify-react-native";
 import { CustomToastConfig } from "./components/CustomToastConfig";
 import { useAppState } from "./hooks/useAppState";
+import { useAuthStore } from "./hooks/useAuthStore";
 import { useOnlineManager } from "./hooks/useOnlineManager";
 import { RootNav } from "./navs/RootNav";
 
@@ -25,14 +26,13 @@ const queryClient = new QueryClient({
   defaultOptions: { queries: { retry: 2 } },
 });
 
-const Navigation = createStaticNavigation(RootNav);
-
 SplashScreen.preventAutoHideAsync();
 
 export default function App() {
   useOnlineManager();
-
   useAppState(onAppStateChange);
+
+  const { isLoggedIn, loading } = useAuthStore();
 
   const [fontsLoaded] = useFonts({
     "Poppins-Thin": require("./assets/fonts/Poppins-Thin.ttf"),
@@ -44,12 +44,14 @@ export default function App() {
   });
 
   useEffect(() => {
-    if (fontsLoaded) {
+    if (fontsLoaded && !loading) {
       SplashScreen.hideAsync();
     }
-  }, [fontsLoaded]);
+  }, [fontsLoaded, loading]);
 
-  if (!fontsLoaded) return null;
+  if (!fontsLoaded || loading) {
+    return null;
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -58,12 +60,13 @@ export default function App() {
           position="bottom"
           duration={3000}
           config={CustomToastConfig}
-          showCloseIcon={true}
-          animationStyle={"slide"}
-          autoHide={true}
+          showCloseIcon
+          animationStyle="slide"
+          autoHide
         />
-
-        <Navigation />
+        <NavigationContainer>
+          <RootNav isLoggedIn={isLoggedIn} />
+        </NavigationContainer>
       </SafeAreaProvider>
     </QueryClientProvider>
   );
