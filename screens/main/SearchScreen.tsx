@@ -11,8 +11,8 @@ import {
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { ButtonBack } from "../../components/buttons/ButtonBack";
 import { ButtonFilterSearch } from "../../components/buttons/ButtonFilterSearch";
-import { CartIcon } from "../../components/CartIcon";
 import { InputSearch } from "../../components/inputs/InputSearch";
+import { NotificationIcon } from "../../components/NotificationIcon";
 import {
   SearchSuggestedRestaurants,
   SuggestedRestaurant,
@@ -20,7 +20,7 @@ import {
 import { TextPoppins } from "../../components/texts/TextPoppins";
 import { BasicData, TextRounded } from "../../components/texts/TextRounded";
 import { useDebounce } from "../../hooks/useDebounce";
-import { RootStackParamList } from "../../navs/RootNav";
+import { RootStackParamList } from "../../navs/navigation";
 import { colors } from "../../styles/colors";
 import { globalStyle } from "../../styles/globalStyle";
 
@@ -159,7 +159,7 @@ export const SearchScreen = () => {
 
           <TextPoppins style={styles["screen-name"]}>Search</TextPoppins>
         </View>
-        <CartIcon />
+        <NotificationIcon />
       </View>
 
       <View style={styles["wrap-search"]}>
