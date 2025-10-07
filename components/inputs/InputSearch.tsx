@@ -11,7 +11,7 @@ import {
   ViewStyle,
 } from "react-native";
 import { useDebounce } from "../../hooks/useDebounce";
-import { RootStackParamList } from "../../navs/RootNav";
+import { RootStackParamList } from "../../navs/navigation";
 import { colors } from "../../styles/colors";
 
 interface InputSearchProps {
@@ -66,7 +66,7 @@ export const InputSearch = ({
       <TouchableOpacity
         style={[styles.container, containerStyle]}
         activeOpacity={0.8}
-        onPress={() => navigation.navigate("Search")}
+        onPress={() => navigation.navigate("Main", { screen: "Search" })}
       >
         <Ionicons name="search" size={20} color="#888" style={styles.icon} />
         <View pointerEvents="none" style={{ flex: 1 }}>
@@ -124,9 +124,9 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    fontSize: 16,
+    fontSize: 14,
     color: "#333",
-    fontFamily: "Sen-Regular",
+    fontFamily: "Poppins-Regular",
   },
   clearButton: {
     marginLeft: 8,
