@@ -1,43 +1,34 @@
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import React, { useState } from "react";
 import {
   Dimensions,
-  LayoutChangeEvent,
-  ScrollView,
-  View,
   Pressable,
+  ScrollView,
   StyleSheet,
+  View,
 } from "react-native";
 import Modal from "react-native-modal";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import { TextPoppins } from "../texts/TextPoppins";
-import { colors } from "../../styles/colors";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { BOLD } from "../../constants/fonts";
+import { colors } from "../../styles/colors";
+import { TextPoppins } from "../texts/TextPoppins";
+
+interface Props {
+  isVisible: boolean;
+  onClose: VoidFunction;
+  title: string;
+  children: React.ReactNode;
+  footer?: React.ReactNode;
+}
 
 export const ModalBase = ({
   isVisible,
   children,
   onClose,
   title,
-}: {
-  isVisible: boolean;
-  onClose: VoidFunction;
-  title: string;
-  children: React.ReactNode;
-}) => {
-  const insets = useSafeAreaInsets();
+  footer,
+}: Props) => {
   const screenHeight = Dimensions.get("window").height;
-  const [contentHeight, setContentHeight] = useState(0);
-
-  const handleLayout = (e: LayoutChangeEvent) => {
-    const { height } = e.nativeEvent.layout;
-    setContentHeight(height);
-  };
-
-  const modalHeight = Math.min(
-    contentHeight + 40 + insets.bottom,
-    screenHeight * 0.95
-  ); // max 95% layar
+  const [footerHeight, setFooterHeight] = useState<number>(0);
 
   return (
     <Modal
@@ -47,12 +38,15 @@ export const ModalBase = ({
       animationOut="slideOutDown"
       onBackdropPress={onClose}
       onSwipeComplete={onClose}
-      swipeDirection="down"
+      // swipeDirection="down"
+      propagateSwipe={true}
     >
       <View
         style={[
           styles.container,
-          { maxHeight: screenHeight * 0.95, height: modalHeight },
+          {
+            maxHeight: screenHeight * 0.93,
+          },
         ]}
       >
         {/* Header */}
@@ -72,10 +66,25 @@ export const ModalBase = ({
         {/* Content */}
         <ScrollView
           showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.scrollContainer}
+          bounces={false}
+          contentContainerStyle={[
+            styles.scrollContainer,
+            {
+              paddingBottom: footerHeight + 16,
+            },
+          ]}
         >
-          <View onLayout={handleLayout}>{children}</View>
+          {children}
         </ScrollView>
+
+        {footer && (
+          <View
+            style={styles.footer}
+            onLayout={(e) => setFooterHeight(e.nativeEvent.layout.height)}
+          >
+            {footer}
+          </View>
+        )}
       </View>
     </Modal>
   );
@@ -91,6 +100,7 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     overflow: "hidden",
+    flexShrink: 1,
   },
   header: {
     paddingHorizontal: 20,
@@ -98,6 +108,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
+    flexShrink: 0,
   },
   title: {
     fontSize: 18,
@@ -106,5 +117,14 @@ const styles = StyleSheet.create({
   scrollContainer: {
     paddingHorizontal: 20,
     paddingBottom: 24,
+    flexGrow: 1,
+  },
+  footer: {
+    padding: 16,
+    backgroundColor: colors.white,
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 0,
   },
 });
