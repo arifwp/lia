@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.anonymous.lia"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,25 +22,26 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.anonymous.lia"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-     [
-      "expo-font",
-      {
-        "fonts": [
-          "./assets/fonts/Poppins-Thin.ttf",
-          "./assets/fonts/Poppins-Regular.ttf",
-          "./assets/fonts/Poppins-SemiBold.ttf",
-          "./assets/fonts/Poppins-Medium.ttf",
-          "./assets/fonts/Poppins-Bold.ttf",
-          "./assets/fonts/Poppins-ExtraBold.ttf"
-        ]
-      }
-     ]
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./assets/fonts/Poppins-Thin.ttf",
+            "./assets/fonts/Poppins-Regular.ttf",
+            "./assets/fonts/Poppins-SemiBold.ttf",
+            "./assets/fonts/Poppins-Medium.ttf",
+            "./assets/fonts/Poppins-Bold.ttf",
+            "./assets/fonts/Poppins-ExtraBold.ttf"
+          ]
+        }
+      ]
     ]
   }
 }
