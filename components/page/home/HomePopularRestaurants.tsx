@@ -1,9 +1,12 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import { Image } from "expo-image";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
 import { SEMIBOLD } from "../../../constants/fonts";
+import { RootStackParamList } from "../../../navs/navigation";
 import { colors } from "../../../styles/colors";
-import { blurImg } from "../../../styles/globalStyle";
+import { blurImg, globalStyle } from "../../../styles/globalStyle";
 import { TextPoppins } from "../../texts/TextPoppins";
 
 export interface PopularRestaurant {
@@ -21,8 +24,16 @@ export const HomePopularRestaurants = ({
 }: {
   data: PopularRestaurant;
 }) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate("Main", { screen: "DetailRestaurant" })
+      }
+    >
       <Image
         style={styles.image}
         placeholder={blurImg}
@@ -37,14 +48,7 @@ export const HomePopularRestaurants = ({
             {data.distance}
           </TextPoppins>
 
-          <View
-            style={{
-              width: 4,
-              height: 4,
-              borderRadius: 4 / 2,
-              backgroundColor: colors["primary-gray"],
-            }}
-          />
+          <View style={globalStyle["dot-divider"]} />
 
           <TextPoppins style={styles["text-secondary"]}>
             {`${data.estTime} min`}
@@ -72,7 +76,7 @@ export const HomePopularRestaurants = ({
           </TextPoppins>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
