@@ -1,31 +1,43 @@
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { Octicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { StyleSheet, TouchableOpacity } from "react-native";
+import React from "react";
+import { Pressable, StyleProp, ViewStyle } from "react-native";
 import { RootStackParamList } from "../../navs/navigation";
+import { colors } from "../../styles/colors";
+import { globalStyle } from "../../styles/globalStyle";
 
-export const ButtonBack = () => {
+interface Props {
+  containerStyle?: StyleProp<ViewStyle>;
+  iconStyle?: StyleProp<ViewStyle>;
+  iconSize?: number;
+  iconColor?: string;
+  children?: React.ReactNode;
+}
+
+export const ButtonBack = ({
+  containerStyle,
+  iconStyle,
+  iconSize = 24,
+  iconColor = colors["primary-black"],
+  children,
+}: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   return (
-    <TouchableOpacity
-      style={styles.container}
+    <Pressable
+      style={[globalStyle["circle-button"], containerStyle]}
       onPress={() => navigation.goBack()}
     >
-      <Ionicons name="chevron-back-outline" size={24} color="black" />
-    </TouchableOpacity>
+      {children || (
+        <Octicons
+          name="arrow-left"
+          size={iconSize}
+          color={iconColor}
+          style={iconStyle}
+        />
+      )}
+    </Pressable>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    height: 46,
-    width: 46,
-    padding: 6,
-    borderRadius: 46 / 2,
-    backgroundColor: "#ECF0F4",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-});
