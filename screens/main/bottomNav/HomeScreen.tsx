@@ -114,7 +114,7 @@ const dummyPopularRestaurants: PopularRestaurant[] = [
 export const dummyFoods: FoodItem[] = [
   {
     id: "1",
-    name: "Lorem Ipsum is simply dummy text of the printing and typesetting  industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not",
+    name: "Lorem Ipsum is simply dummy text of the printing and typesetting  industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not, Lorem Ipsum is simply dummy text of the printing and typesetting, It has survived not, Lorem Ipsum is simply dummy text of the printing and typesetting,It has survived not, Lorem Ipsum is simply dummy text of the printing and typesetting printing and typesetting  industry. Lorem Ipsum has been",
     desc: "Nasi goreng dengan cita rasa khas kampung, menggunakan sambal terasi dan potongan ayam suwir.",
     price: "25000",
     img: "https://placehold.co/500x500.png",
