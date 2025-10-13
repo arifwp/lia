@@ -7,6 +7,11 @@ export const globalStyle = StyleSheet.create({
     padding: 16,
     backgroundColor: "#fff",
   },
+  "container-row": {
+    flexDirection: "row",
+    gap: 16,
+    alignItems: "center",
+  },
   "primary-color": {
     color: colors.primary,
   },
@@ -19,6 +24,27 @@ export const globalStyle = StyleSheet.create({
     width: 100,
     height: 100,
     resizeMode: "contain",
+  },
+  "container-tools": {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  "container-right-tools": {
+    gap: 12,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  "circle-button": {
+    justifyContent: "center",
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  "dot-divider": {
+    width: 4,
+    height: 4,
+    borderRadius: 4 / 2,
+    backgroundColor: colors["primary-gray"],
   },
 });
 
