@@ -18,6 +18,7 @@ export type MainStackParamList = {
   Cart: undefined;
   Notification: undefined;
   Profile: undefined;
+  DetailRestaurant: undefined;
 };
 
 export type RootStackParamList = {
