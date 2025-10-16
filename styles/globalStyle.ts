@@ -5,12 +5,17 @@ export const globalStyle = StyleSheet.create({
   "root-container": {
     flex: 1,
     padding: 16,
-    backgroundColor: "#fff",
+    backgroundColor: colors.white,
   },
   "container-row": {
     flexDirection: "row",
     gap: 16,
     alignItems: "center",
+  },
+  "container-column": {
+    flexDirection: "column",
+    gap: 16,
+    alignItems: "flex-start",
   },
   "primary-color": {
     color: colors.primary,
@@ -45,6 +50,17 @@ export const globalStyle = StyleSheet.create({
     height: 4,
     borderRadius: 4 / 2,
     backgroundColor: colors["primary-gray"],
+  },
+  "screen-name": {
+    fontSize: 16,
+  },
+  "upper-shadow": {
+    elevation: 5,
+    shadowColor: "#000",
+    shadowOpacity: 0.2,
+    shadowOffset: { width: 0, height: 3 },
+    shadowRadius: 5,
+    zIndex: 10,
   },
 });
 
