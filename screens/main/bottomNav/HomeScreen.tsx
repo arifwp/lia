@@ -21,7 +21,7 @@ import {
 } from "../../../components/page/home/HomePopularRestaurants";
 import { TextPoppins } from "../../../components/texts/TextPoppins";
 import { BasicData } from "../../../components/texts/TextRounded";
-import { BOLD } from "../../../constants/fonts";
+import { MEDIUM } from "../../../constants/fonts";
 import { colors } from "../../../styles/colors";
 import { blurImg, globalStyle } from "../../../styles/globalStyle";
 
@@ -116,81 +116,91 @@ export const dummyFoods: FoodItem[] = [
     id: "1",
     name: "Lorem Ipsum is simply dummy text of the printing and typesetting  industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not, Lorem Ipsum is simply dummy text of the printing and typesetting, It has survived not, Lorem Ipsum is simply dummy text of the printing and typesetting,It has survived not, Lorem Ipsum is simply dummy text of the printing and typesetting printing and typesetting  industry. Lorem Ipsum has been",
     desc: "Nasi goreng dengan cita rasa khas kampung, menggunakan sambal terasi dan potongan ayam suwir.",
-    price: "25000",
+    price: 20000,
     img: "https://placehold.co/500x500.png",
     isFavorite: true,
+    stock: 10,
   },
   {
     id: "2",
     name: "Mie Ayam Bakso",
     desc: "Mie ayam gurih disajikan dengan kuah kaldu hangat dan bakso sapi kenyal.",
-    price: "22000",
+    price: 20000,
     img: "https://placehold.co/500x500.png",
     isFavorite: false,
+    stock: 10,
   },
   {
     id: "3",
     name: "Sate Ayam Madura",
     desc: "Sate ayam khas Madura dengan bumbu kacang kental dan lontong lembut.",
-    price: "28000",
+    price: 20000,
     img: "https://placehold.co/500x500.png",
     isFavorite: true,
+    stock: 10,
   },
   {
     id: "4",
     name: "Nasi Padang",
     desc: "Paket nasi padang lengkap dengan rendang sapi, sambal ijo, dan daun singkong.",
-    price: "35000",
+    price: 20000,
     img: "https://placehold.co/500x500.png",
     isFavorite: false,
+    stock: 10,
   },
   {
     id: "5",
     name: "Ayam Geprek Keju",
     desc: "Ayam goreng crispy dengan sambal bawang pedas dan topping lelehan keju mozarella.",
-    price: "27000",
+    price: 20000,
     img: "https://placehold.co/500x500.png",
     isFavorite: true,
+    stock: 10,
   },
   {
     id: "6",
     name: "Bakso Malang",
     desc: "Bakso daging sapi dengan tahu isi, pangsit goreng, dan kuah kaldu bening gurih.",
-    price: "20000",
+    price: 20000,
     img: "https://placehold.co/500x500.png",
     isFavorite: false,
+    stock: 10,
   },
   {
     id: "7",
     name: "Soto Betawi",
     desc: "Soto khas Betawi dengan kuah santan gurih, daging sapi empuk, dan taburan emping.",
-    price: "32000",
+    price: 20000,
     img: "https://placehold.co/500x500.png",
     isFavorite: false,
+    stock: 10,
   },
   {
     id: "8",
     name: "Gado-Gado Jakarta",
     desc: "Sayuran segar dengan bumbu kacang manis gurih dan taburan kerupuk.",
-    price: "23000",
+    price: 20000,
     img: "https://placehold.co/500x500.png",
     isFavorite: true,
+    stock: 10,
   },
   {
     id: "9",
     name: "Nasi Uduk Komplit",
     desc: "Nasi uduk gurih disajikan dengan ayam goreng, sambal kacang, dan telur balado.",
-    price: "24000",
+    price: 20000,
     img: "https://placehold.co/500x500.png",
     isFavorite: false,
+    stock: 10,
   },
   {
     id: "10",
     name: "Pecel Lele Lamongan",
     desc: "Lele goreng garing disajikan dengan sambal tomat pedas dan lalapan segar.",
-    price: "21000",
+    price: 20000,
     img: "https://placehold.co/500x500.png",
     isFavorite: true,
+    stock: 10,
   },
 ];
 
@@ -218,7 +228,7 @@ export const HomeScreen = () => {
           <View style={styles["wrap-address"]}>
             <TextPoppins style={styles["deliver-to"]}>Deliver To</TextPoppins>
 
-            <TextPoppins style={styles.address} numberOfLines={1}>
+            <TextPoppins numberOfLines={1} weight={MEDIUM}>
               Hotel Mana Aja
             </TextPoppins>
           </View>
@@ -259,7 +269,7 @@ export const HomeScreen = () => {
         {/* Last Food Buy Item */}
         <View style={styles["section"]}>
           <View style={styles["wrap-section-title"]}>
-            <TextPoppins weight={BOLD} style={styles["section-title"]}>
+            <TextPoppins weight={MEDIUM} style={styles["section-title"]}>
               Last Buyed
             </TextPoppins>
           </View>
@@ -278,7 +288,7 @@ export const HomeScreen = () => {
         {/* Popular Restaurants */}
         <View style={styles["section"]}>
           <View style={styles["wrap-section-title"]}>
-            <TextPoppins weight={BOLD} style={styles["section-title"]}>
+            <TextPoppins weight={MEDIUM} style={styles["section-title"]}>
               Popular Restaurants
             </TextPoppins>
 
@@ -323,9 +333,6 @@ const styles = StyleSheet.create({
   "deliver-to": {
     fontSize: 12,
     color: colors.primary,
-  },
-  address: {
-    color: colors["primary-black"],
   },
   "sv-categories": {
     marginHorizontal: 16,

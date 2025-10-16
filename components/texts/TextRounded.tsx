@@ -6,10 +6,11 @@ import {
   TextStyle,
   ViewStyle,
 } from "react-native";
+import { colors } from "../../styles/colors";
 import { TextPoppins } from "./TextPoppins";
 
 export interface BasicData {
-  id: number;
+  id: number | string;
   name: string;
   img?: string;
   desc?: string;
@@ -29,20 +30,20 @@ export const TextRounded = ({
 }: Props) => {
   return (
     <Pressable style={[styles.container, containerStyle]} {...rest}>
-      <TextPoppins style={[styles.name, textStyle]}>{data.name}</TextPoppins>
+      <TextPoppins style={textStyle} numberOfLines={1} ellipsizeMode="tail">
+        {data.name}
+      </TextPoppins>
     </Pressable>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+    maxWidth: 200,
     paddingHorizontal: 12,
     paddingVertical: 8,
     borderRadius: 34,
-    borderColor: "#EDEDED",
-    borderWidth: 1,
-  },
-  name: {
-    fontSize: 14,
+    borderColor: colors["medium-gray"],
+    borderWidth: 0.5,
   },
 });

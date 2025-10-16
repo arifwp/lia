@@ -1,12 +1,13 @@
 import AntDesign from "@expo/vector-icons/AntDesign";
 import { Image } from "expo-image";
-import { StyleSheet, View } from "react-native";
+import { Pressable, StyleSheet, View } from "react-native";
+import { useMainNavigation } from "../../../hooks/useAppNav";
 import { colors } from "../../../styles/colors";
 import { blurImg } from "../../../styles/globalStyle";
 import { TextPoppins } from "../../texts/TextPoppins";
 
 export interface SuggestedRestaurant {
-  id: number;
+  id: string;
   img: string;
   name: string;
   rating: string;
@@ -17,8 +18,17 @@ interface Props {
 }
 
 export const SearchSuggestedRestaurants = ({ data }: Props) => {
+  const navigation = useMainNavigation();
+
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPress={() =>
+        navigation.navigate("DetailRestaurant", {
+          id: data.id,
+        })
+      }
+    >
       <Image
         style={styles.image}
         placeholder={blurImg}
@@ -38,7 +48,7 @@ export const SearchSuggestedRestaurants = ({ data }: Props) => {
           <TextPoppins style={styles.rating}>{data.rating}</TextPoppins>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

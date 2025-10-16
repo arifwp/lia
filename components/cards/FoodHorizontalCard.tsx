@@ -7,19 +7,23 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { MEDIUM, SEMIBOLD } from "../../constants/fonts";
+import { BOLD, SEMIBOLD } from "../../constants/fonts";
+import { FoodVariant } from "../../screens/main/ModalMenuVariantScreen";
 import { colors } from "../../styles/colors";
 import { blurImg, globalStyle } from "../../styles/globalStyle";
+import { ModalDetailFood } from "../modals/ModalDetailFood";
 import { TextPoppins } from "../texts/TextPoppins";
 
 export interface FoodHorizontalCard {
   id: string;
   name: string;
   desc: string;
-  price: string;
+  price: number;
   img?: string;
   soldCount: number;
   likeCount: number;
+  variants?: FoodVariant[];
+  stock: number;
 }
 
 interface Props {
@@ -38,7 +42,9 @@ export const FoodHorizontalCard = ({ data, style }: Props) => {
       >
         <View style={styles["container-info"]}>
           <View style={styles.info}>
-            <TextPoppins weight={MEDIUM}>{data.name}</TextPoppins>
+            <TextPoppins weight={SEMIBOLD} style={{ fontSize: 16 }}>
+              {data.name}
+            </TextPoppins>
 
             <View
               style={[
@@ -59,10 +65,16 @@ export const FoodHorizontalCard = ({ data, style }: Props) => {
               </TextPoppins>
             </View>
 
-            <TextPoppins style={styles["text-info"]}>{data.desc}</TextPoppins>
+            <TextPoppins
+              style={styles["text-info"]}
+              numberOfLines={2}
+              ellipsizeMode="tail"
+            >
+              {data.desc}
+            </TextPoppins>
           </View>
 
-          <TextPoppins weight={SEMIBOLD}>{data.price}</TextPoppins>
+          <TextPoppins weight={BOLD}>{data.price}</TextPoppins>
         </View>
 
         <Image
@@ -73,6 +85,10 @@ export const FoodHorizontalCard = ({ data, style }: Props) => {
           contentFit="cover"
         />
       </Pressable>
+
+      {isOpen && (
+        <ModalDetailFood data={data} isOpen={isOpen} setIsOpen={setIsOpen} />
+      )}
     </>
   );
 };
@@ -96,6 +112,7 @@ const styles = StyleSheet.create({
   },
   "text-info": {
     color: colors["primary-gray"],
+    fontSize: 12,
   },
   image: {
     width: 140,

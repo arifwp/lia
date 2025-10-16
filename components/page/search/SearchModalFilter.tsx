@@ -17,13 +17,7 @@ export const SearchModalFilter = ({
   const { radius, setRadius } = useSearchFilterStore();
 
   return (
-    <ModalBase
-      isVisible={isVisible}
-      onClose={onClose}
-      title="Filter"
-      style={{ gap: 24 }}
-      height={"50%"}
-    >
+    <ModalBase isVisible={isVisible} onClose={onClose} title="Filter">
       <View style={styles.section}>
         <TextPoppins weight={MEDIUM} style={styles.title}>
           Category
@@ -66,6 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   section: {
+    paddingBottom: 32,
     flexDirection: "column",
     gap: 12,
   },
