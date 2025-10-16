@@ -1,19 +1,20 @@
 import {
   Pressable,
+  PressableProps,
   StyleProp,
   StyleSheet,
-  TouchableOpacityProps,
+  TextStyle,
   ViewStyle,
 } from "react-native";
 import { SEMIBOLD } from "../../constants/fonts";
 import { colors } from "../../styles/colors";
 import { TextPoppins } from "../texts/TextPoppins";
 
-interface Props extends TouchableOpacityProps {
+interface Props extends PressableProps {
   onPress: (data?: any) => void;
   title: string;
   buttonStyle?: StyleProp<ViewStyle>;
-  textStyle?: StyleProp<ViewStyle>;
+  textStyle?: StyleProp<TextStyle>;
   isLoading?: boolean;
 }
 

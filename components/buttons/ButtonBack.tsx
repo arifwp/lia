@@ -2,12 +2,12 @@ import { Octicons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import React from "react";
-import { Pressable, StyleProp, ViewStyle } from "react-native";
+import { Pressable, PressableProps, StyleProp, ViewStyle } from "react-native";
 import { RootStackParamList } from "../../navs/navigation";
 import { colors } from "../../styles/colors";
 import { globalStyle } from "../../styles/globalStyle";
 
-interface Props {
+interface Props extends PressableProps {
   containerStyle?: StyleProp<ViewStyle>;
   iconStyle?: StyleProp<ViewStyle>;
   iconSize?: number;
@@ -21,6 +21,7 @@ export const ButtonBack = ({
   iconSize = 24,
   iconColor = colors["primary-black"],
   children,
+  ...rest
 }: Props) => {
   const navigation =
     useNavigation<NativeStackNavigationProp<RootStackParamList>>();
@@ -29,6 +30,7 @@ export const ButtonBack = ({
     <Pressable
       style={[globalStyle["circle-button"], containerStyle]}
       onPress={() => navigation.goBack()}
+      {...rest}
     >
       {children || (
         <Octicons

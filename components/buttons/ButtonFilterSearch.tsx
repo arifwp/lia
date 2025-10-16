@@ -5,7 +5,6 @@ import {
   PressableProps,
   StyleProp,
   StyleSheet,
-  View,
   ViewStyle,
 } from "react-native";
 import { colors } from "../../styles/colors";
@@ -22,7 +21,7 @@ export const ButtonFilterSearch = ({ style, ...rest }: Props) => {
   };
 
   return (
-    <View>
+    <>
       <Pressable
         style={[styles.container, style]}
         onPress={() => {
@@ -33,14 +32,17 @@ export const ButtonFilterSearch = ({ style, ...rest }: Props) => {
         <Ionicons name="options-sharp" size={24} color={"white"} />
       </Pressable>
 
-      <SearchModalFilter isVisible={isModalVisible} onClose={onModalClose} />
-    </View>
+      {isModalVisible && (
+        <SearchModalFilter isVisible={isModalVisible} onClose={onModalClose} />
+      )}
+    </>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    padding: 12,
+    height: 42,
+    paddingHorizontal: 8,
     backgroundColor: colors.primary,
     justifyContent: "center",
     borderRadius: 12,
