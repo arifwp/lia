@@ -1,4 +1,3 @@
-import { NavigationContainer } from "@react-navigation/native";
 import {
   focusManager,
   QueryClient,
@@ -64,9 +63,7 @@ export default function App() {
           animationStyle="slide"
           autoHide
         />
-        <NavigationContainer>
-          <RootNav isLoggedIn={isLoggedIn} />
-        </NavigationContainer>
+        <RootNav isLoggedIn={isLoggedIn} />
       </SafeAreaProvider>
     </QueryClientProvider>
   );

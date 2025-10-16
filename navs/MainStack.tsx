@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CartScreen } from "../screens/main/CartScreen";
 import { DetailRestaurantScreen } from "../screens/main/DetailRestaurantScreen";
+import { ModalMenuVariantScreen } from "../screens/main/ModalMenuVariantScreen";
 import { NotificationScreen } from "../screens/main/NotificationScreen";
 import { ProfileScreen } from "../screens/main/ProfileScreen";
 import { SearchScreen } from "../screens/main/SearchScreen";
@@ -17,5 +18,14 @@ export const MainStack = () => (
     <Stack.Screen name="Notification" component={NotificationScreen} />
     <Stack.Screen name="Profile" component={ProfileScreen} />
     <Stack.Screen name="DetailRestaurant" component={DetailRestaurantScreen} />
+    <Stack.Screen
+      name="ModalMenuVariant"
+      component={ModalMenuVariantScreen}
+      options={{
+        presentation: "card",
+        animation: "slide_from_right",
+        gestureEnabled: true,
+      }}
+    />
   </Stack.Navigator>
 );
