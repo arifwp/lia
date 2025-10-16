@@ -38,7 +38,6 @@ export const ModalBase = ({
       animationOut="slideOutDown"
       onBackdropPress={onClose}
       onSwipeComplete={onClose}
-      // swipeDirection="down"
       propagateSwipe={true}
     >
       <View
@@ -120,7 +119,9 @@ const styles = StyleSheet.create({
     flexGrow: 1,
   },
   footer: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    paddingBottom: 32,
     backgroundColor: colors.white,
     position: "absolute",
     left: 0,
