@@ -1,7 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useState } from "react";
 import {
   StyleProp,
   StyleSheet,
@@ -10,15 +8,13 @@ import {
   View,
   ViewStyle,
 } from "react-native";
-import { useDebounce } from "../../hooks/useDebounce";
-import { RootStackParamList } from "../../navs/navigation";
+import { useMainNavigation } from "../../hooks/useAppNav";
 import { colors } from "../../styles/colors";
 
 interface InputSearchProps {
   value?: string;
   onChange?: (text: string) => void;
   placeholder?: string;
-  debounceTime?: number;
   containerStyle?: StyleProp<ViewStyle>;
   isSearchScreen?: boolean;
 }
@@ -26,35 +22,20 @@ interface InputSearchProps {
 export const InputSearch = ({
   value = "",
   onChange,
-  placeholder = "Search food or restaurants...",
-  debounceTime = 1000,
+  placeholder = "Cari menu atau restoran...",
   containerStyle,
   isSearchScreen = false,
 }: InputSearchProps) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
+  const navigation = useMainNavigation();
   const [search, setSearch] = useState<string>(value);
-  const debouncedValue = useDebounce(search, debounceTime);
 
-  // Ref untuk tracking apakah onChange sudah dipanggil
-  const isFirstRender = useRef(true);
-
-  // Sync external value changes ke internal state
-  useEffect(() => {
-    setSearch(value);
-  }, [value]);
-
-  // Debounce effect
-  useEffect(() => {
-    // Skip first render untuk menghindari double call
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
-    onChange?.(debouncedValue);
-  }, [debouncedValue]);
+  const handleChangeText = useCallback(
+    (text: string) => {
+      setSearch(text);
+      onChange?.(text);
+    },
+    [onChange]
+  );
 
   const handleClear = useCallback(() => {
     setSearch("");
@@ -66,7 +47,7 @@ export const InputSearch = ({
       <TouchableOpacity
         style={[styles.container, containerStyle]}
         activeOpacity={0.8}
-        onPress={() => navigation.navigate("Main", { screen: "Search" })}
+        onPress={() => navigation.navigate("Search")}
       >
         <Ionicons name="search" size={20} color="#888" style={styles.icon} />
         <View pointerEvents="none" style={{ flex: 1 }}>
@@ -81,7 +62,6 @@ export const InputSearch = ({
     );
   }
 
-  // Interactive search
   return (
     <View style={[styles.container, containerStyle]}>
       <Ionicons name="search" size={20} color="#888" style={styles.icon} />
@@ -90,12 +70,11 @@ export const InputSearch = ({
         placeholder={placeholder}
         placeholderTextColor={colors["primary-gray"]}
         value={search}
-        onChangeText={setSearch}
+        onChangeText={handleChangeText}
         autoCorrect={false}
         autoCapitalize="none"
         autoFocus={isSearchScreen}
       />
-
       {search.length > 0 && (
         <TouchableOpacity onPress={handleClear} style={styles.clearButton}>
           <Ionicons
@@ -111,7 +90,7 @@ export const InputSearch = ({
 
 const styles = StyleSheet.create({
   container: {
-    height: 52,
+    height: 42,
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "#f2f2f2",

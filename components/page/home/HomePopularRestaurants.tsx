@@ -31,7 +31,10 @@ export const HomePopularRestaurants = ({
     <Pressable
       style={styles.container}
       onPress={() =>
-        navigation.navigate("Main", { screen: "DetailRestaurant" })
+        navigation.navigate("Main", {
+          screen: "DetailRestaurant",
+          params: { id: data.id },
+        })
       }
     >
       <Image
